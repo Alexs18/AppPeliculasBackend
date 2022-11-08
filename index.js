@@ -2,25 +2,11 @@ const Express = require('express');
 const Pool = require('./app/Database/index');
 const app = Express();
 const RouterPeliculas = require('./app/routes/Peliculas.Routes');
-const PeliculasController = require('./app/Controllers/peliculas.controller');
+const RouterRelaciones = require('./app/routes/Relaciones.Routes');
 
-app.use(RouterPeliculas);
 
-app.get('/Relaciones', async(req, res)=>{
-    let {rows} = await Pool.query(`select u.nombre, r.descripcion, (pe.descripcion) as pelis from users as u
-	left join peliculas as pe
-on u.id = pe.idusuario
-	inner join roluser as r
-on u.id = r.idusuario
-`);
-    res.status(200).
-    json({
-        status:'ok',
-        message:'estamos funcionando',
-        data:rows
-    })
-});
+app.use(RouterPeliculas, RouterRelaciones);
 
-app.listen(8080, ()=>{
-    console.log('estamos corriendo en el 8080')
+app.listen(3000, ()=>{
+    console.log('estamos corriendo en el 3000')
 })
