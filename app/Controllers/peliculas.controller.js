@@ -1,13 +1,14 @@
-const Pool = require('../Database/index')
+let {GetPeliculas} = require('../services/peliculas.services');
+
 class peliculascontroller{
 
     async GetMovies(req, res){
-       let {rows} = await Pool.query('select * from peliculas');
+       let datos = await GetPeliculas();
        res.status(200).
        json({
         status:'ok',
         message:'estamos funcionando',
-        data:rows
+        data:datos
     })
     }
 
