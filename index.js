@@ -1,6 +1,5 @@
 const Express = require('express');
-const Pool = require('./app/Database/index')
-
+const Pool = require('./app/Database/index');
 const app = Express();
 
 app.get('/Peliculas', async(req, res)=>{
