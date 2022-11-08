@@ -1,16 +1,10 @@
 const Express = require('express');
 const Pool = require('./app/Database/index');
 const app = Express();
+const RouterPeliculas = require('./app/routes/Peliculas.Routes');
+const PeliculasController = require('./app/Controllers/peliculas.controller');
 
-app.get('/Peliculas', async(req, res)=>{
-    let {rows} = await Pool.query('select * from peliculas');
-    res.status(200).
-    json({
-        status:'ok',
-        message:'estamos funcionando',
-        data:rows
-    })
-});
+app.use(RouterPeliculas);
 
 app.get('/Relaciones', async(req, res)=>{
     let {rows} = await Pool.query(`select u.nombre, r.descripcion, (pe.descripcion) as pelis from users as u
