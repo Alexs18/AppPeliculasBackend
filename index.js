@@ -1,5 +1,4 @@
 const Express = require('express');
-const Pool = require('./app/Database/index');
 const app = Express();
 const RouterPeliculas = require('./app/routes/Peliculas.Routes');
 const RouterRelaciones = require('./app/routes/Relaciones.Routes');
