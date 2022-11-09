@@ -2,7 +2,6 @@ const Pool = require('../Database/index');
 
 class RelacionesController{
 
-
     async GetRelaciones(req,res){
         let {rows} = await Pool.query(`select u.nombre, r.descripcion, (pe.descripcion) as pelis from users as u
         left join peliculas as pe
