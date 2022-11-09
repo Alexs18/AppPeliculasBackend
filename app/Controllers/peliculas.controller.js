@@ -40,9 +40,26 @@ class peliculascontroller{
     }
     async UpdateMovies(req, res){
 
+        let {descripcion, titulo, genero} = req.body;
+        let {id} = req.params;
+        let updateMovie = await Pool.query(`update peliculas set descripcion = $1, 
+        titulo = $2, genero = $3 where id = $4 returning id`, [ descripcion, titulo, genero, id]);
+        res.status(201).json({
+            message: 'Pelicula actualizada satisfactoriamente',
+            data: updateMovie.rows
+        })        
+        
+
     }
     async DeletePeliculas(req, res){
-        
+
+        //delete from peliculas where id =
+        let {id} = req.params;
+        let deleteMovie = await Pool.query(`delete from peliculas where id = $1 returning id`, [ id ]);
+        res.status(201).json({
+            message: 'Pelicula borrada satisfactoriamente',
+            data: deleteMovie.rows
+        })  
     }
 
 }
