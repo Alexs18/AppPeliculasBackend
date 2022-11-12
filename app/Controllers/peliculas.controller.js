@@ -13,6 +13,33 @@ class peliculascontroller{
     })
     }
 
+    async DetallePeliculas(req, res){
+
+        let {id} = req.params;
+        try {
+            let {rows} = await Pool.query(`
+            select * from peliculas as pe
+                inner join detallepelicula as dep
+            on pe.id = dep.idpelicula where pe.id = ${id}`);
+            if (rows.length < 0 ) {
+                res.status(404).json({
+                    message:'no se pudo encontrar la pelicula'
+                })
+            }
+            res.status(200).json({
+                message:'Pelicula Encontrada correctamente',
+                data:rows
+            })
+            
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                message:'Existió un erorr al momento de buscar el detalle de la pelicula',
+                error: error.message
+            })
+        }
+    }
+
     async CreateMovies(req, res){
         let {descripcion, titulo, genero} = req.body;
         try {
