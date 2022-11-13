@@ -4,14 +4,19 @@ let {GetPeliculas} = require('../services/peliculas.services');
 class peliculascontroller{
 
     async GetMovies(req, res){
-       let datos = await GetPeliculas();
-       console.log(datos);
-       res.status(200).
-       json({
-        status:'ok',
-        message:'estamos funcionando',
-        data:datos
-    })
+    try {
+        let datos = await GetPeliculas();
+        console.log(datos);
+        res.status(200).
+        json({
+         status:'ok',
+         message:'estamos funcionando',
+         data:datos
+     })  
+    } catch (error) {
+        console.log(error);
+    }
+      
     }
 
     async DetallePeliculas(req, res){

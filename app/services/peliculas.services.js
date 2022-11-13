@@ -7,7 +7,10 @@ class PeliculasServices{
             let {rows} = await Pool.query('select * from peliculas');
             return rows
         } catch (error) {
+            console.log('error');
+            console.log(error);
             return error
+            
         }
     }
 }
