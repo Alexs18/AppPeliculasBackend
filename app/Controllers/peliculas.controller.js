@@ -49,7 +49,7 @@ class peliculascontroller{
                             [descripcion, titulo, genero]);
             if (rows.length < 0 ) {
                 res.status(500).json({
-                    message:'no se pudo ingresar el usuario'
+                    message:'no se pudo ingresar la pelicula'
                 })
             }
             res.status(200).json({
